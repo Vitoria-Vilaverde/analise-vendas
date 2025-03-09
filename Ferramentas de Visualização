@@ -1,0 +1,32 @@
+# Integração com Ferramentas de Visualização (Power BI, Looker Studio, Streamlit)
+
+import pandas as pd
+import plotly.express as px
+import streamlit as st
+
+# Carregar previsões salvas
+df_pred = pd.read_csv("data/sales_predictions.csv")
+
+# Criar aplicação no Streamlit
+st.title("📊 Dashboard de Previsão de Vendas")
+
+# Exibir tabela de previsões
+st.subheader("📋 Dados das Previsões")
+st.dataframe(df_pred)
+
+# Criar gráfico de comparação entre valores reais e previstos
+fig = px.line(df_pred, y=["Actual", "RF_Predicted", "XGB_Predicted"], 
+              labels={"value": "Vendas", "variable": "Modelo"},
+              title="Comparação de Vendas Reais vs. Previstas")
+st.plotly_chart(fig)
+
+# Criar gráfico de erro por modelo
+df_pred["Erro_RF"] = abs(df_pred["Actual"] - df_pred["RF_Predicted"])
+df_pred["Erro_XGB"] = abs(df_pred["Actual"] - df_pred["XGB_Predicted"])
+
+fig_erro = px.bar(df_pred, y=["Erro_RF", "Erro_XGB"], 
+                   labels={"value": "Erro Absoluto", "variable": "Modelo"},
+                   title="Erro Absoluto por Modelo")
+st.plotly_chart(fig_erro)
+
+st.write("🔹 Dashboard gerado com Streamlit e Plotly. Pode ser exportado para Power BI e Looker Studio!")
