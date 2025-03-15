@@ -1,4 +1,4 @@
-## 🔹 **Projeto: Previsão de Vendas com Machine Learning** 
+## .🔹 **Projeto: Previsão de Vendas com Machine Learning** 
  
 ### 📌 **Objetivo**  
 Utilizar técnicas de análise de dados e modelos preditivos para identificar padrões de vendas, prever demanda futura e auxiliar na tomada de decisões estratégicas.  
